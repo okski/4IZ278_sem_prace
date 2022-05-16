@@ -1,0 +1,53 @@
+.contents div, .contents ol {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.contents li:before {
+    content: none;
+}
+
+.gallery img {
+    max-height: 400px;
+    max-width: 400px;
+    width: auto;
+    height: auto;
+}
+
+.gallery img:hover {
+    opacity: 1;
+    cursor: default;
+}
+
+div[id^="year_20"] h2 {
+    font-size: 2em;
+}
+
+.gallery h3 {
+    text-align: center;
+}
+
+.gallery ol {
+    margin-bottom: 1em;
+    margin-left: 25%;
+    list-style-type: decimal;
+}
+
+.gallery li {
+    padding-bottom: 0.5em;
+}
+
+table {
+    display: table;
+    padding: 5px 0 5px 0;
+}
+
+.year_hide {
+    display: none;
+}
+
+/*.gallery p {*/
+/*    text-align: center;*/
+/*    font-weight: bold;*/
+/*    font-size: 1.5em;*/
+/*}*/

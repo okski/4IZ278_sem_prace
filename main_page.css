@@ -1,0 +1,306 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+
+
+
+/* My styles */
+body {
+    font-size: 1em;
+    font-family: "Times New Roman", Arial, Times, serif;
+    counter-reset: h2counter;
+}
+
+polygon {
+    fill:black;
+    stroke-width:1;
+}
+
+a {
+    width: 100%;
+    left: 0;
+    bottom: 10px;
+    padding: 0 4px 1px 4px;
+}
+
+a:hover {
+    text-decoration: underline;
+    padding-bottom: 1px;
+    /*border-width: 0 0 2px;*/
+    /*border-style: solid;*/
+}
+
+h1 {
+    margin: 0.5em 0 0.25em 0.4em;
+    font-weight: bold;
+    font-size: 2.5em;
+}
+
+line {
+    stroke-width: 3;
+}
+
+/* Navigation */
+nav {
+    /*position: fixed;*/
+    /*top: 0;*/
+    width: 100%;
+    background-color: #90baca;
+}
+
+nav ol {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+nav ol > li {
+    padding: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+nav li {
+    padding-bottom: 4px;
+}
+
+nav ul {
+    padding-top: 10px;
+}
+
+nav .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #90baca;
+}
+
+nav li:hover, .breadcrumb_div a:hover {
+    background-color: #ea95b8;
+}
+
+nav .dropdown:hover .dropdown-content {
+    display: block;
+    box-sizing: border-box;
+}
+
+nav svg {
+    margin-left: 10px;
+}
+
+nav .dropdown:hover svg {
+    transform: rotate(90deg);
+}
+
+nav a {
+    margin: 5px 0 5px 0;
+}
+
+.active {
+    background-color: beige;
+}
+
+/* Bread crumb navigation */
+.breadcrumb_div {
+    margin: 0.5em 0 0 1em;
+}
+
+.breadcrumb_ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.breadcrumb_li {
+    display: inline-flex;
+    align-items: center;
+}
+
+.arrow {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+/* Content */
+.content {
+    /*display: flex;*/
+    /*flex-flow: row;*/
+    margin-left: 1em;
+}
+
+.content h2 {
+    font-size: 1.75em;
+    font-weight: bold;
+    overflow: hidden;
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+    counter-reset: h3counter;
+}
+
+.numbered_h2:before {
+    content: counters(h2counter, ".") ". ";
+    counter-increment: h2counter;
+}
+
+.content h3 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 1em;
+    margin-bottom: 0.25em;
+}
+
+.numbered_h3:before {
+    content: counter(h2counter) "." counter(h3counter) ". ";
+    counter-increment: h3counter;
+}
+
+.content p {
+    margin-bottom: 0.5em;
+}
+
+.content ul {
+    margin-bottom: 1em;
+    margin-left: 5%;
+    list-style-type: initial;
+}
+
+.pets {
+    display: block;
+    text-align: center;
+}
+
+.pets img {
+    max-width: 300px;
+    max-height: 400px;
+    width: auto;
+    height: auto;
+}
+
+    /* Information box */
+.infobox {
+    margin-left: 1em;
+    margin-right: 1em;
+    float: right;
+    background-color: #aacaff;
+}
+
+.infobox h2 {
+    border: none;
+    font-size: 1.25em;
+    margin-top: 0.5em;
+}
+
+.header {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 1em;
+    background-color: aliceblue;
+}
+
+td {
+    padding: 5px 10px 5px 10px;
+}
+
+.td_img {
+    padding: 0;
+}
+
+.table_img {
+    display: block;
+    max-width: 250px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    /* Summary contents */
+.contents {
+    margin-top: 0.5em;
+    margin-bottom: 0.25em;
+    display: table;
+    background-color: #c9c9c9;
+}
+
+.contents h2 {
+    font-size: 1em;
+    text-align: center;
+    margin-top: 0.25em;
+    padding-bottom: 0.25em;
+}
+
+.contents li {
+    margin: 0.5em;
+}
+
+.contents ol {
+    counter-reset: item;
+}
+
+.contents li:before {
+    content: counters(item, ".") ".";
+    counter-increment: item;
+}
+
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 10px 10px;
+    margin-bottom: 1em;
+}
+
+.gallery img {
+    max-height: 250px;
+    max-width: 500px;
+    width: auto;
+    height: auto;
+}
+
+.gallery img:hover {
+    opacity: 0.7;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
