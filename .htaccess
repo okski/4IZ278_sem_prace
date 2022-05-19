@@ -1,0 +1,11 @@
+php_flag display_errors on
+
+
+ErrorDocument 404 /~hosj03/sem_prace/error/400.html
+ErrorDocument 403 /~hosj03/sem_prace/error/400.html
+ErrorDocument 401 /~hosj03/sem_prace/error/400.html
+
+
+<IfModule mod_deflate.c>
+	AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/x-javascript text/javascript application/javascript application/json
+</IfModule>

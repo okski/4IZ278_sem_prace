@@ -1,0 +1,10 @@
+nav, .breadcrumb_div, .infobox, img, .contents, #Image_gallery, #Gallery, footer, .btn {
+    display: none;
+}
+
+@media print {
+    h2, h3, ol, li {
+        page-break-after: avoid;
+    }
+}
+
