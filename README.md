@@ -1,1 +1,2 @@
-# 4IZ278_sem_prace
+# Seminární práce na předměz [4IZ278]:https://4iz278.github.io/ (Webové technologie) na Vysoké škole ekonomické
+tento projekt vznikl na základě [projektu]: https://eso.vse.cz/~hosj03/stat_web/main_page.html , který mu předcházel v jiném [předmětu]: https://4iz268.github.io/.
