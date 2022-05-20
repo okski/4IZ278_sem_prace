@@ -2,6 +2,8 @@
 chdir("../../");
 $currentDIR = getcwd();
 
+require_once $currentDIR .'/application/inc/user.php';
+
 include  $currentDIR . '/application/inc/header.php';
 
 include $currentDIR . '/resources/html/Dahyun.html';

@@ -312,7 +312,7 @@ class AccessTokenMetadata
      */
     public function getUserId()
     {
-        return $this->getField('user_id');
+        return $this->getField('IdUser');
     }
 
     /**

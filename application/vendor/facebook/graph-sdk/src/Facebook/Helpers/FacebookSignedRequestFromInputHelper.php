@@ -120,7 +120,7 @@ abstract class FacebookSignedRequestFromInputHelper
     }
 
     /**
-     * Returns the user_id if available.
+     * Returns the IdUser if available.
      *
      * @return string|null
      */

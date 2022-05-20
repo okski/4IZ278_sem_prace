@@ -104,13 +104,13 @@ class SignedRequest
     }
 
     /**
-     * Returns user_id from signed request data if available.
+     * Returns IdUser from signed request data if available.
      *
      * @return string|null
      */
     public function getUserId()
     {
-        return $this->get('user_id');
+        return $this->get('IdUser');
     }
 
     /**

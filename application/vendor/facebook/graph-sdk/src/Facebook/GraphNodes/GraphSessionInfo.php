@@ -97,6 +97,6 @@ class GraphSessionInfo extends GraphNode
      */
     public function getUserId()
     {
-        return $this->getField('user_id');
+        return $this->getField('IdUser');
     }
 }

@@ -365,6 +365,9 @@ footer * {
 
 .log {
     float: right;
+    text-align: center;
+    margin-right: 1em;
+    margin-top: 0.5em;
 }
 
 .btn {
@@ -372,16 +375,16 @@ footer * {
     padding: 0.375em 0.75em;
     cursor: pointer;
     line-height: 2;
-    margin-top: 0.5em;
+    margin-top: 0.25em;
     vertical-align: middle;
 }
 
-.login {
+.login, .registration, .reset, .renew {
     margin-left: 2em;
     margin-top: 0.75em;
 }
 
-.login h2 {
+.login h2, .registration h2, .reset h2, .renew h2 {
     font-size: 2em;
     margin-bottom: 0.5em;
     font-weight: bold;
@@ -407,4 +410,17 @@ label {
 label:after {
     content: "\a";
     white-space: pre;
+}
+
+.username {
+    font-weight: bold;
+}
+
+.invalid-feedback {
+    color: #a60000;
+}
+
+.text-danger {
+    color: #a60000;
+    font-size: 1.5em;
 }

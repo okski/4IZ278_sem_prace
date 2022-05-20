@@ -11,20 +11,20 @@ if (!empty($_SESSION['IdUser'])){
 $errors=false;
 if (!empty($_POST)){
     #region zpracování formuláře
-    $userQuery=$db->prepare('SELECT * FROM hosj03.user WHERE Email=:Email LIMIT 1;');
+    $userQuery=$db->prepare('SELECT * FROM hosj03.user WHERE Email=:email LIMIT 1;');
     $userQuery->execute([
-        ':Email'=>trim($_POST['Email'])
+        ':Email'=>trim($_POST['email'])
     ]);
     if ($user=$userQuery->fetch(PDO::FETCH_ASSOC)){
 
-        if (password_verify($_POST['Password'],$user['Password'])){
+        if (password_verify($_POST['password'],$user['Password'])){
             //heslo je platné => přihlásíme uživatele
             $_SESSION['IdUser']=$user['IdUser'];
-            $_SESSION['Username']=$user['name'];
+            $_SESSION['Username']=$user['Username'];
 
             //smažeme požadavky na obnovu hesla
-            $forgottenDeleteQuery=$db->prepare('DELETE FROM hosj03.forgotten_passwords WHERE IdUser=:user;');
-            $forgottenDeleteQuery->execute([':user'=>$user['IdUser']]);
+//            $forgottenDeleteQuery=$db->prepare('DELETE FROM hosj03.forgotten_passwords WHERE IdUser=:user;');
+//            $forgottenDeleteQuery->execute([':user'=>$user['IdUser']]);
 
             header('Location: index.php');
             exit();
@@ -38,7 +38,6 @@ if (!empty($_POST)){
     #endregion zpracování formuláře
 }
 
-//vložíme do stránek hlavičku
 include __DIR__.'/application/inc/header.php';
 ?>
 
@@ -54,7 +53,7 @@ include __DIR__.'/application/inc/header.php';
         </div>
         <div class="form-group">
             <label for="password">Heslo:</label>
-            <input type="password" name="Password" id="password" required class="form-control <?php echo ($errors?'is-invalid':''); ?>" />
+            <input type="password" name="password" id="password" required class="form-control <?php echo ($errors?'is-invalid':''); ?>" />
         </div>
         <button type="submit" class="btn btn-primary">přihlásit se</button>
         <a href="forgotten-password.php" class="btn btn-light">zapomněl(a) jsem heslo</a>
@@ -65,5 +64,4 @@ include __DIR__.'/application/inc/header.php';
 
 
 <?php
-//vložíme do stránek patičku
 include __DIR__.'/application/inc/footer.php';

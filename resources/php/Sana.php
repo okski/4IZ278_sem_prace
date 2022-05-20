@@ -2,8 +2,7 @@
 chdir("../../");
 $currentDIR = getcwd();
 
-//var_dump(__DIR__);
-//var_dump($currentDIR);
+require_once $currentDIR .'/application/inc/user.php';
 
 include  $currentDIR . '/application/inc/header.php';
 
