@@ -12,6 +12,7 @@ $idReview = 'add';
 $song = array();
 $userReview = array();
 $remainingReviews = array();
+$atLeastOneArticle = 1;
 
 $reviewsQuery = $db->prepare('SELECT *, song.Name as Name, a.Name as AlbumName FROM hosj03.`song` JOIN reviewOfSong rOS on song.IdSong = rOS.IdSong JOIN user u on u.IdUser = rOS.IdUser JOIN album a on a.IdAlbum = song.IdAlbum WHERE song.IdSong=:IdSong;');
 $reviewsQuery->execute([
@@ -25,6 +26,9 @@ if (!empty($reviews)) {
             $userReview = $review;
         } else {
             $remainingReviews[] = $review;
+            if (!empty($review['Article'])) {
+                $atLeastOneArticle = 0;
+            }
         }
     }
 } else {
@@ -166,7 +170,7 @@ if (!empty($errors['empty'])) {
         Articles
     </h2>
     <div class="reviews">
-        <?php printReviews($userReview, $remainingReviews);?>
+        <?php printReviews($userReview, $remainingReviews, $atLeastOneArticle);?>
     </div>
 
 </div>
@@ -199,8 +203,8 @@ function printStarsArticle($stars) {
     echo '</svg>';
 }
 
-function printReviews($userReview, $remainingReviews) {
-    if ((empty($userReview) || empty($userReview['Article'])) && (empty($remainingReviews) || empty($remainingReviews['Article']))) {
+function printReviews($userReview, $remainingReviews, $atLeastOneArticle) {
+    if ((empty($userReview) || empty($userReview['Article'])) && (empty($remainingReviews) || $atLeastOneArticle)) {
         echo '<p>None have written review for this song yet. <span class="bold">Be the first one.</span></p>';
     } else {
         if (!empty($userReview) && !empty($userReview['Article'])) {
