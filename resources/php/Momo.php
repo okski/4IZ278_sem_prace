@@ -1,13 +1,9 @@
 <?php
-chdir("../../");
-$currentDIR = getcwd();
 
-require_once $currentDIR .'/application/inc/user.php';
+require_once __DIR__ .'/../../application/inc/user.php';
 
-include  $currentDIR . '/application/inc/header.php';
+include  __DIR__ .'/../../application/inc/header.php';
 
-include $currentDIR . '/resources/html/Momo.html';
+include __DIR__ .'/../../resources/html/Momo.html';
 
-include  $currentDIR . '/application/inc/footer.php';
-
-chdir(__DIR__);
+include  __DIR__ .'/../../application/inc/footer.php';

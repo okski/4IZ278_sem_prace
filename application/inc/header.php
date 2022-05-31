@@ -3,17 +3,19 @@ echo '<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Twice fandom web</title>
+    <title id="title">Twice fandom web</title>
     <link rel="stylesheet" href="/~hosj03/sem_prace/resources/css/main.css">
     <link rel="stylesheet" href="/~hosj03/sem_prace/resources/css/print.css" media="print">
-    <link href="/~hosj03/sem_prace/resources/css/Image_gallery.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="/~hosj03/sem_prace/resources/css/forming.css">
+    <link rel="stylesheet" href="/~hosj03/sem_prace/resources/css/Image_gallery.css">
     <link href="/~hosj03/sem_prace/resources/img_c/favicon/favicon.png" rel="icon">
+    <link rel="stylesheet" href="/~hosj03/sem_prace/resources/css/discography.css">
 </head>
 <body>
 <nav>
     <ol>
-        <li class="active">
-            <a href="/~hosj03/sem_prace/index.php">Home</a>
+        <li id="Home">
+            <a href="./index.php">Home</a>
         </li>
         <li class="dropdown">
             <p class="dropbtn">Members
@@ -23,44 +25,50 @@ echo '<!DOCTYPE html>
             </p>
 
             <ul class="dropdown-content">
-                <li>
+                <li id="Nayeon">
                     <a href="/~hosj03/sem_prace/resources/php/Nayeon.php">Nayeon (나연)</a>
                 </li>
-                <li>
+                <li id="Jeongyeon">
                     <a href="/~hosj03/sem_prace/resources/php/Jeongyeon.php">Jeongyeon (정연)</a>
                 </li>
-                <li>
+                <li id="Momo">
                     <a href="/~hosj03/sem_prace/resources/php/Momo.php">Momo (모모)</a>
                 </li>
-                <li>
+                <li id="Sana">
                     <a href="/~hosj03/sem_prace/resources/php/Sana.php">Sana (사나)</a>
                 </li>
-                <li>
+                <li id="Jihyo">
                     <a href="/~hosj03/sem_prace/resources/php/Jihyo.php">Jihyo (지효)</a>
                 </li>
-                <li>
+                <li id="Mina">
                     <a href="/~hosj03/sem_prace/resources/php/Mina.php">Mina (미나)</a>
                 </li>
-                <li>
+                <li id="Dahyun">
                     <a href="/~hosj03/sem_prace/resources/php/Dahyun.php">Dahyun (다현)</a>
                 </li>
-                <li>
+                <li id="Chaeyoung">
                     <a href="/~hosj03/sem_prace/resources/php/Chaeyoung.php">Chaeyoung (채영)</a>
                 </li>
-                <li>
+                <li id="Tzuyu">
                     <a href="/~hosj03/sem_prace/resources/php/Tzuyu.php">Tzuyu (쯔위)</a>
                 </li>
             </ul>
         </li>
-        <li>
+        <li id="History">
             <a href="/~hosj03/sem_prace/resources/php/forming.php">History</a>
         </li>
-        <li>
-            <a href="/~hosj03/sem_prace/resources/php/discography.php">Discography</a>
+        <li id="Discography">
+            <a href="/~hosj03/sem_prace/application/view/discography.php">Discography</a>
         </li>
-        <li>
+        <li id="JYPE">
             <a href="/~hosj03/sem_prace/resources/php/jype.php">JYPE</a>
-        </li>
+        </li>';
+        if (isset($_SESSION['Admin']) && $_SESSION['Admin']) {
+            echo '<li id="Manage">
+            <a href="/~hosj03/sem_prace/application/view/manage.php">Manage</a>';
+        }
+
+        echo '</li>
     </ol>
 </nav>
 <div class="log">';
@@ -69,7 +77,7 @@ if (isset($_SESSION['IdUser']) && !empty($_SESSION['IdUser'])) {
     echo '<div class="user">přihlášen jako <span class="username">'.$_SESSION['Username'].'</span></div>';
     echo '<a href="/~hosj03/sem_prace/logout.php" class="btn btn-primary">odhlásit se</a>';
 } else {
-    echo '<a href="/~hosj03/sem_prace/login.php" class="btn btn-primary">přihlásit se</a>';
+    echo '<a href="/~hosj03/sem_prace/application/view/login.php" class="btn btn-primary">přihlásit se</a>';
 }
 echo '</div>';
 ?>

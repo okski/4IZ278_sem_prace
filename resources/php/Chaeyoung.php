@@ -1,12 +1,10 @@
 <?php
-chdir("../../");
-$currentDIR = getcwd();
-require_once $currentDIR .'/application/inc/user.php';
 
-include  $currentDIR . '/application/inc/header.php';
+require_once __DIR__  . '/../../application/inc/user.php';
 
-include $currentDIR . '/resources/html/Chaeyoung.html';
+include __DIR__  . '/../../application/inc/header.php';
 
-include  $currentDIR . '/application/inc/footer.php';
+include __DIR__ .'/../../resources/html/Chaeyoung.html';
 
-chdir(__DIR__);
+include __DIR__  . '/../../application/inc/footer.php';
+

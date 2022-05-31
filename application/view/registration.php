@@ -66,7 +66,7 @@ if (!empty($_POST)){
 }
 
 //vložíme do stránek hlavičku
-include __DIR__.'/application/inc/header.php';
+include __DIR__ . '/application/inc/header.php';
 ?>
 <div class="registration">
     <h2>Registrace nového uživatele</h2>
@@ -103,9 +103,9 @@ include __DIR__.'/application/inc/header.php';
         </div>
         <button type="submit" class="btn btn-primary">registrovat se</button>
         <a href="login.php" class="btn btn-light">přihlásit se</a>
-        <a href="index.php" class="btn btn-light">zrušit</a>
+        <a href="../../index.php" class="btn btn-light">zrušit</a>
     </form>
 </div>
 <?php
 //vložíme do stránek patičku
-include __DIR__.'/application/inc/footer.php';
+include __DIR__ . '/application/inc/footer.php';

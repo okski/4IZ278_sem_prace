@@ -322,7 +322,7 @@ td {
 }
 
 
-.gallery {
+.gallery, .gallery_discography {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -331,14 +331,14 @@ td {
     margin-bottom: 1em;
 }
 
-.gallery img {
+.gallery img, .gallery_discography img {
     max-height: 250px;
     max-width: 500px;
     width: auto;
     height: auto;
 }
 
-.gallery img:hover {
+.gallery img:hover, .gallery_discography img:hover {
     opacity: 0.7;
     cursor: pointer;
     transition: 0.3s;
@@ -363,11 +363,12 @@ footer * {
     padding-bottom: 0.5em;
 }
 
-.log {
+.log, .user_rating {
     float: right;
     text-align: center;
     margin-right: 1em;
     margin-top: 0.5em;
+    width: 15%;
 }
 
 .btn {
@@ -379,7 +380,7 @@ footer * {
     vertical-align: middle;
 }
 
-.login, .registration, .reset, .renew {
+.login, .registration, .reset, .renew{
     margin-left: 2em;
     margin-top: 0.75em;
 }
@@ -417,10 +418,88 @@ label:after {
 }
 
 .invalid-feedback {
+    margin-top: 0.5em;
     color: #a60000;
+    margin-left: 2em;
 }
 
 .text-danger {
     color: #a60000;
     font-size: 1.5em;
+}
+
+a:nth-child(2), use:nth-child(2) {
+     transform: translate(20px);
+ }
+a:nth-child(3), use:nth-child(3) {
+     transform: translate(40px);
+ }
+a:nth-child(4), use:nth-child(4) {
+     transform: translate(60px);
+ }
+a:nth-child(5), use:nth-child(5) {
+     transform: translate(80px);
+ }
+
+.rating {
+    height: 15px;
+    width: 110px;
+}
+
+.user_rating {
+    float: right;
+}
+
+.clearance {
+    clear:both;
+}
+
+.header_article {
+    min-height: 25px;
+}
+
+.reviews {
+    border: 1px solid #eeeeee;
+    border-radius: 2px;
+    width: 50%;
+}
+
+.review {
+    border-bottom: 1px solid #eeeeee;
+    padding: 5px;
+}
+
+.review_title, .comment label {
+
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 0.25em;
+}
+
+.review_box, .comment {
+    margin-top: 0.5em;
+    margin-left: 2em;
+}
+
+p {
+    margin-left: 1.2em;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.comment_textarea {
+    min-width: 20%;
+    min-height: 100px;
+}
+
+.timestamp {
+    font-size: 0.8em;
+    float: right;
+}
+
+.edit {
+    margin-top: -1em;
+    float: right;
 }

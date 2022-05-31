@@ -1,6 +1,6 @@
 <?php
 //načteme připojení k databázi a inicializujeme session
-require_once 'application/inc/user.php';
+require_once __DIR__ . '/../inc/user.php';
 
 if (!empty($_SESSION['IdUser'])){
     //uživatel už je přihlášený, nemá smysl, aby se přihlašoval znovu
@@ -72,13 +72,13 @@ if (!empty($_REQUEST) && !empty($_REQUEST['code'])){
 }
 
 //vložíme do stránek hlavičku
-include __DIR__.'/application/inc/header.php';
+include __DIR__ . '/../inc/header.php';
 
 echo '<div class="renew"><h2>Obnova zapomenutého hesla</h2>';
 
 if ($invalidCode){
     echo '<p class="text-danger">Kód pro obnovu hesla již není platný.</p>';
-    echo '<a href="index.php" class="btn btn-light">zpět na homepage</a>';
+    echo '<a href="../../index.php" class="btn btn-light">zpět na homepage</a>';
 }else{
     echo '<form method="post">
             <div class="form-group">
@@ -93,12 +93,12 @@ if ($invalidCode){
             
             <input type="hidden" name="code" value="'.htmlspecialchars($_REQUEST['code']).'" />
             <input type="hidden" name="user" value="'.htmlspecialchars($_REQUEST['user']).'" />
-            <input type="hidden" name="request" value="'.htmlspecialchars($_REQUEST['request']).'" />
+            <input type="hidden" name="request" value="'.htmlspecialchars($_REQUEST['request']). '" />
             
             <button type="submit" class="btn btn-primary">změnit heslo</button>
-            <a href="index.php" class="btn btn-light">zrušit</a>
+            <a href="../../index.php" class="btn btn-light">zrušit</a>
           </form></div>';
 }
 
 //vložíme do stránek patičku
-include __DIR__.'/application/inc/footer.php';
+include __DIR__ . '/../inc/footer.php';

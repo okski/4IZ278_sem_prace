@@ -1,6 +1,6 @@
 <?php
 //načteme připojení k databázi a inicializujeme session
-require_once 'application/inc/user.php';
+require_once __DIR__ . '/../inc/user.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 
@@ -86,7 +86,7 @@ if (!empty($_POST) && !empty($_POST['email'])){
 }
 
 //vložíme do stránek hlavičku
-include __DIR__.'/application/inc/header.php';
+include __DIR__ . '/../inc/header.php';
 ?>
     <div class="reset">
         <h2>Obnova zapomenutého hesla</h2>
@@ -94,7 +94,7 @@ include __DIR__.'/application/inc/header.php';
 if (@$_GET['mailed']=='ok'){
 
     echo '<p>Zkontrolujte svoji e-mailovou schránku a klikněte na odkaz, který vám byl zaslán mailem.</p>';
-    echo '<a href="index.php" class="btn btn-light">zpět na homepage</a>';
+    echo '<a href="../../index.php" class="btn btn-light">zpět na homepage</a>';
 
 }else{
     ?>
@@ -110,7 +110,7 @@ if (@$_GET['mailed']=='ok'){
             </div>
             <button type="submit" class="btn btn-primary">zaslat e-mail k obnově hesla</button>
             <a href="login.php" class="btn btn-light">přihlásit se</a>
-            <a href="index.php" class="btn btn-light">zrušit</a>
+            <a href="../../index.php" class="btn btn-light">zrušit</a>
         </form>
     </div>
 
@@ -120,4 +120,4 @@ if (@$_GET['mailed']=='ok'){
 
 <?php
 //vložíme do stránek patičku
-include __DIR__.'/application/inc/footer.php';
+include __DIR__ . '/../inc/footer.php';

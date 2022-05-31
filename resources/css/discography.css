@@ -7,14 +7,14 @@
     content: none;
 }
 
-.gallery img {
+.gallery_discography img {
     max-height: 400px;
     max-width: 400px;
     width: auto;
     height: auto;
 }
 
-.gallery img:hover {
+.gallery_discography img:hover {
     opacity: 1;
     cursor: default;
 }
@@ -23,17 +23,17 @@ div[id^="year_20"] h2 {
     font-size: 2em;
 }
 
-.gallery h3 {
+.gallery_discography h3 {
     text-align: center;
 }
 
-.gallery ol {
+.gallery_discography ol {
     margin-bottom: 1em;
     margin-left: 25%;
     list-style-type: decimal;
 }
 
-.gallery li {
+.gallery_discography li {
     padding-bottom: 0.5em;
 }
 
