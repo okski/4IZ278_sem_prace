@@ -68,7 +68,7 @@ include __DIR__ . '/../inc/header.php';
             <input type="password" name="password" id="password" required class="form-control <?php echo ($errors?'is-invalid':''); ?>" />
         </div>
         <button type="submit" class="btn btn-primary">login</button>
-        <a href="'.<?php echo $fbLoginUrl?>.'" class="btn btn-primary">login with Facebook</a>
+        <a href="<?php echo $fbLoginUrl?>" class="btn btn-primary">login with Facebook</a>
         <a href="forgotten-password.php" class="btn btn-light">forgot password</a>
         <a href="registration.php" class="btn btn-light">register</a>
         <a href="../../index.php" class="btn btn-light">cancel</a>

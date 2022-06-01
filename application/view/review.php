@@ -13,6 +13,8 @@ $song = array();
 $userReview = array();
 $remainingReviews = array();
 $atLeastOneArticle = 1;
+$sumOfReview = 0;
+$countOfReview = 0;
 
 $reviewsQuery = $db->prepare('SELECT *, song.Name as Name, a.Name as AlbumName FROM hosj03.`song` JOIN reviewOfSong rOS on song.IdSong = rOS.IdSong JOIN user u on u.IdUser = rOS.IdUser JOIN album a on a.IdAlbum = song.IdAlbum WHERE song.IdSong=:IdSong;');
 $reviewsQuery->execute([
@@ -22,6 +24,8 @@ $reviews = $reviewsQuery->fetchAll(PDO::FETCH_ASSOC);
 
 if (!empty($reviews)) {
     foreach ($reviews as $review) {
+        $sumOfReview += $review['Rating'];
+        $countOfReview++;
         if(isset($_SESSION['IdUser']) && $_SESSION['IdUser'] == $review['IdUser']) {
             $userReview = $review;
         } else {
@@ -123,7 +127,10 @@ include __DIR__ . '/../inc/header.php';?>
 '</h1>
 
 <div class="rating_box">
-    <div class="avarage_rating"></div>
+    <div class="avarage_rating">
+        <?php printAverageRating($sumOfReview, $countOfReview)?>
+    </div>
+    <div class="clearance"></div>
     <div class="user_rating">
         <?php printRatingStars($userReview)?>
     </div>
@@ -157,6 +164,7 @@ if (!empty($_SESSION['IdUser']) && (empty($userReview) || empty($userReview['Art
 
     <div>
         <label for="text">Comment:</label>
+        <br>
         <textarea name="text" id="text" required class="comment_textarea">';
     if (!empty($_GET['edit']) && $_GET['edit'] == 'edit') {
         echo htmlspecialchars($userReview['Article']);
@@ -264,6 +272,14 @@ function printRatingStars($userReview) {
         }
     }
 
+}
+
+function printAverageRating($sumOfReview, $countOfReview) {
+    if ($countOfReview == 0) {
+        echo '<span class="">None</span>';
+    } else {
+        echo round(($sumOfReview/$countOfReview) * 2 * 10).'%';
+    }
 }
 
 include __DIR__ . '/../inc/footer.php';
