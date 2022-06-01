@@ -1,11 +1,38 @@
 php_flag display_errors on
 
-
-#ErrorDocument 404 /~hosj03/sem_prace/error/400.html
-#ErrorDocument 403 /~hosj03/sem_prace/error/400.html
-#ErrorDocument 401 /~hosj03/sem_prace/error/400.html
-
+ErrorDocument 404 /~hosj03/sem_prace/error/400.html
+ErrorDocument 403 /~hosj03/sem_prace/error/400.html
+ErrorDocument 401 /~hosj03/sem_prace/error/400.html
 
 <IfModule mod_deflate.c>
-	AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/x-javascript text/javascript application/javascript application/json
+	AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/js
+    AddOutputFilterByType DEFLATE application/javascript
 </IfModule>
+
+<IfModule mod_headers.c>
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+Header set X-UA-Compatible "IE=Edge,chrome=1"
+
+php_value upload_max_filesize 5M
+php_value post_max_size 5M
+php_value max_execution_time 120
+
+RewriteEngine on
+Options +FollowSymlinks
+
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,QSA,L]
+
+#RewriteCond %{HTTPS} !=on
+#RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+RewriteCond %{QUERY_STRING} base64_encode[^(]*\([^)]*\) [OR]
+RewriteCond %{QUERY_STRING} (<|%3C)([^s]*s)+cript.*(>|%3E) [NC,OR]
+RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2})

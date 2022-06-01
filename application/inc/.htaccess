@@ -7,3 +7,4 @@ Deny from all
 
 # povolení přístupu z jedné adresy
 Allow from 127.0.0.1
+Allow from 146.102
