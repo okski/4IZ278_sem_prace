@@ -72,7 +72,6 @@ echo '<!DOCTYPE html>
     </ol>
 </nav>
 <div class="log">';
-
 if (isset($_SESSION['IdUser']) && !empty($_SESSION['IdUser'])) {
     echo '<div class="user">logged in as <span class="username">'.$_SESSION['Username'].'</span></div>';
     echo '<a href="/~hosj03/sem_prace/logout.php" class="btn btn-primary">logout</a>';

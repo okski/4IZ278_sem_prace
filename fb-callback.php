@@ -66,7 +66,7 @@
       $updateQuery = $db->prepare('UPDATE hosj03.user SET FacebookId=:facebookId WHERE IdUser=:id LIMIT 1;');
       $updateQuery->execute([
         ':facebookId'=>$fbUserId,
-        ':id'=>$user['user_id']
+        ':id'=>$user['IdUser']
       ]);
 
     }else{
@@ -92,10 +92,9 @@
   #region přihlášení uživatele
   if (!empty($user)){
     //přihlásíme uživatele (uložíme si jeho údaje do session)
-    $_SESSION['IdUser']=$user['user_id'];
-    $_SESSION['Username']=$user['name'];
+    $_SESSION['IdUser']=$user['IdUser'];
+    $_SESSION['Username']=$user['Username'];
   }
-
   //přesměrujeme uživatele na homepage
   header('Location: index.php');
   #endregion přihlášení uživatele

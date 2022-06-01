@@ -4,7 +4,7 @@ require_once __DIR__ . '/../inc/user.php';
 
 if (!empty($_SESSION['IdUser'])){
     //uživatel už je přihlášený, nemá smysl, aby se registroval
-    header('Location: index.php');
+    header('Location: ../../index.php');
     exit();
 }
 
@@ -59,7 +59,7 @@ if (!empty($_POST)){
         $_SESSION['Username']=$name;
 
         //přesměrování na homepage
-        header('Location: index.php');
+        header('Location: ../../index.php');
         exit();
     }
     #endregion zpracování formuláře
