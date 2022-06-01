@@ -14,7 +14,7 @@ function generatepasswd ($length = 10) {
     return $randomString;
 }
 
-if (!empty($_SESSION['user_id'])){
+if (!empty($_SESSION['IdUser'])){
     //uživatel už je přihlášený, nemá smysl, aby se přihlašoval znovu
     header('Location: index.php');
     exit();
@@ -69,7 +69,7 @@ if (!empty($_POST) && !empty($_POST['email'])){
         $mailer->isHTML(true);
         $mailer->Body ='<html>
                         <head><meta charset="utf-8" /></head>
-                        <body>Pro obnovu hesla do Semestrální práce od uživatele hosj03 klikněte na následující odkaz: <a href="'.htmlspecialchars($link).'">'.htmlspecialchars($link).'</a></body>
+                        <body>For password reset to semestral work from user hosj03 click on following link, which has lifespan of one hour: <a href="'.htmlspecialchars($link).'">'.htmlspecialchars($link).'</a></body>
                       </html>';
         $mailer->AltBody='Pro obnovu hesla do Semestrální práce od uživatele hosj03 klikněte na následující odkaz: '.$link;
 
@@ -89,7 +89,7 @@ if (!empty($_POST) && !empty($_POST['email'])){
 include __DIR__ . '/../inc/header.php';
 ?>
     <div class="reset">
-        <h2>Obnova zapomenutého hesla</h2>
+        <h2>Reset of forgotten password</h2>
 <?php
 if (@$_GET['mailed']=='ok'){
 
@@ -105,12 +105,12 @@ if (@$_GET['mailed']=='ok'){
                 <input type="email" name="email" id="email" required class="form-control <?php echo ($errors?'is-invalid':''); ?>"
                        value="<?php echo htmlspecialchars(@$_POST['email'])?>"/>
                 <?php
-                echo ($errors?'<div class="invalid-feedback">Neplatný e-mail.</div>':'');
+                echo ($errors?'<div class="invalid-feedback">Invalid e-mail.</div>':'');
                 ?>
             </div>
-            <button type="submit" class="btn btn-primary">zaslat e-mail k obnově hesla</button>
-            <a href="login.php" class="btn btn-light">přihlásit se</a>
-            <a href="../../index.php" class="btn btn-light">zrušit</a>
+            <button type="submit" class="btn btn-primary">send e-mail for password reset</button>
+            <a href="login.php" class="btn btn-light">login</a>
+            <a href="../../index.php" class="btn btn-light">cancel</a>
         </form>
     </div>
 

@@ -12,6 +12,7 @@ include __DIR__ . '/../inc/header.php';
 $albums = array();
 $uniqeYears = array();
 $songsId = array();
+$albumCount = 0;
 
 $query='SELECT * FROM hosj03.`album` ORDER BY ReleaseDate;';
 $data = $db->query($query);
@@ -20,6 +21,7 @@ $albumsData = $data->fetchAll(PDO::FETCH_ASSOC);
 
 if (!empty($albumsData)) {
     foreach ($albumsData as $album) {
+        $albumCount++;
         if (preg_match('/^[0-9]{1,4}/', $album['ReleaseDate'])) {
             $year = substr($album['ReleaseDate'], 0, 4);
         }
@@ -62,7 +64,7 @@ function printAlbums($uniqeYears, $albums) {
             $album->printAlbum($uniqeYear);
         }
 
-        echo '    </div>';
+        echo '</div>';
     }
 
 
@@ -88,7 +90,7 @@ function printAlbums($uniqeYears, $albums) {
     </h1>
     <div class="content">
         <p>
-            Twice debuted with the album "The story begins" in 2015 and released over 30 albums, singles and repackaged albums so far.
+            Twice debuted with the album "The story begins" in 2015 and released over <?php echo (round($albumCount / 5) * 5) ?> albums, singles and repackaged albums so far.
         </p>
         <?php printContents($uniqeYears);?>
         <div>

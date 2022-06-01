@@ -44,6 +44,19 @@ if (empty($reviews) && empty($song)) {
     exit();
 }
 
+if (!empty($_GET['delete']) && (empty($userReview) || empty($userReview['Article']))) {
+    include __DIR__ . '/../../error/400.html';
+    exit();
+}
+
+if (!empty($userReview) && !empty($userReview['Article']) &&
+    !empty($_GET['delete']) && $_GET['delete'] == 'delete') {
+    $updateQuery = $db->prepare('UPDATE hosj03.reviewOfSong SET Article=\'\' WHERE IdReview=:IdReview;');
+    $updateQuery->execute([':IdReview'=>$userReview['IdReview']]);
+    unset($_GET['delete']);
+    header('Location: review.php?IdSong='.$_GET['IdSong']);
+}
+
 $errors = array();
 
 if (!empty($_POST)) {
@@ -65,6 +78,7 @@ if (!empty($_POST)) {
             ':IdReview'=>$userReview['IdReview'],
             ':UpdatedAt'=>date('y-m-d')
         ]);
+        unset($_POST);
         header('Location: review.php?IdSong='.$_GET['IdSong']);
         exit();
     }
@@ -79,6 +93,7 @@ if (!empty($_GET['Stars']) && $_GET['Stars'] >= 1 && $_GET['Stars'] <= 5) {
             ':IdReview'=>$userReview['IdReview'],
             ':UpdatedAt'=>date('y-m-d')
         ]);
+        unset($_GET['Stars']);
     } else {
         $saveQuery = $db->prepare('INSERT INTO hosj03.reviewOfSong (IdUser, IdSong, CreatedAt, UpdatedAt, Rating) VALUES (:IdUser, :IdSong, :CreatedAt, :UpdatedAt, :Rating);');
         $saveQuery->execute([
@@ -88,6 +103,7 @@ if (!empty($_GET['Stars']) && $_GET['Stars'] >= 1 && $_GET['Stars'] <= 5) {
             ':UpdatedAt'=>date('y-m-d'),
             ':Rating'=>$_GET['Stars'],
         ]);
+        unset($_GET['Stars']);
     }
     header('Location: review.php?IdSong='.$_GET['IdSong']);
     exit();
@@ -210,7 +226,8 @@ function printReviews($userReview, $remainingReviews, $atLeastOneArticle) {
         if (!empty($userReview) && !empty($userReview['Article'])) {
             echo '<article class="review"><div class="header_article"><h3>'.htmlspecialchars($userReview['Username']).' <span>';
             printStarsArticle($userReview['Rating']);
-            echo '</span></h2> <span class="edit"><a href="?IdSong='.$_GET['IdSong'].'&edit=edit" >edit</a></span></div>
+            echo '</span></h2> <span class="change"><a href="?IdSong='.$_GET['IdSong'].'&edit=edit" >edit</a>
+<a href="?IdSong='.$_GET['IdSong'].'&delete=delete">delete</a></span></div>
                     <p>'.htmlspecialchars($userReview['Article']).'
                     <span class="timestamp">'.htmlspecialchars(date("d. m. Y", strtotime($userReview['UpdatedAt']))).'</span></p>
                     

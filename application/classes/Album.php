@@ -97,8 +97,7 @@ class Album {
             $this->printSongs();
 
             echo '      </ol>
-                    </div>
-                </div>';
+                    </div>';
         }
     }
 

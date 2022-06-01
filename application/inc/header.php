@@ -15,7 +15,7 @@ echo '<!DOCTYPE html>
 <nav>
     <ol>
         <li id="Home">
-            <a href="./index.php">Home</a>
+            <a href="/~hosj03/sem_prace/index.php">Home</a>
         </li>
         <li class="dropdown">
             <p class="dropbtn">Members
@@ -74,11 +74,10 @@ echo '<!DOCTYPE html>
 <div class="log">';
 
 if (isset($_SESSION['IdUser']) && !empty($_SESSION['IdUser'])) {
-    echo '<div class="user">přihlášen jako <span class="username">'.$_SESSION['Username'].'</span></div>';
-    echo '<a href="/~hosj03/sem_prace/logout.php" class="btn btn-primary">odhlásit se</a>';
+    echo '<div class="user">logged in as <span class="username">'.$_SESSION['Username'].'</span></div>';
+    echo '<a href="/~hosj03/sem_prace/logout.php" class="btn btn-primary">logout</a>';
 } else {
-    echo '<a href="/~hosj03/sem_prace/application/view/login.php" class="btn btn-primary">přihlásit se</a>';
+    echo '<a href="/~hosj03/sem_prace/application/view/login.php" class="btn btn-primary">login</a>';
 }
 echo '</div>';
-?>
 
