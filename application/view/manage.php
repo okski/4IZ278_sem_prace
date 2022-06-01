@@ -222,6 +222,8 @@ include __DIR__ . '/../inc/header.php';
                 <input type="text" name="Name" id="Name" placeholder="ex. The story begins" pattern="^\S+(\s)?\S*$" required
                 <?php if(!empty($errors) && empty($errors['noSongsFile']) && empty($errors['noAlbumsFile'])) {
                     errorHandler($_POST['Name'], $errors, 'Name');
+                } else {
+                    echo '>';
                 }?>
                 <br>
             </div>
@@ -230,8 +232,9 @@ include __DIR__ . '/../inc/header.php';
                 <input type="text" name="ReleaseDate" id="ReleaseDate" placeholder="ex. 2022-05-23" pattern="^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
                 <?php if(!empty($errors) && empty($errors['noSongsFile']) && empty($errors['noAlbumsFile'])) {
                     errorHandler($_POST['ReleaseDate'], $errors, 'ReleaseDate');
+                } else {
+                    echo '>';
                 }?>
-                <?php ?>
                 <br>
             </div>
             <div class="field">
@@ -239,6 +242,8 @@ include __DIR__ . '/../inc/header.php';
                 <input type="text" name="NumberOfSongs" id="NumberOfSongs" pattern="^[0-9]{1,2}$" placeholder="ex. 12" required
                 <?php if(!empty($errors) && empty($errors['noSongsFile']) && empty($errors['noAlbumsFile'])) {
                     errorHandler($_POST['NumberOfSongs'], $errors, 'NumberOfSongs');
+                } else {
+                    echo '>';
                 }?>
                 <br>
             </div>
@@ -247,6 +252,8 @@ include __DIR__ . '/../inc/header.php';
                 <input type="text" name="Cover" id="Cover" placeholder="ex. 01_The_story_begins.jpg" pattern="^\S*(\s)?\S*\.(jpg|png|webp|jpeg)$" required
                 <?php if(!empty($errors) && empty($errors['noSongsFile']) && empty($errors['noAlbumsFile'])) {
                     errorHandler($_POST['Cover'], $errors, 'Cover');
+                } else {
+                    echo '>';
                 }?>
                 <br>
             </div>
@@ -260,7 +267,7 @@ include __DIR__ . '/../inc/header.php';
             </div>
             <div class="field">
                 <label for="file">File: </label>
-                <input type="file" name="file" id="file" accept=".text/csv">
+                <input type="file" name="file" id="file" accept=".text,.csv">
                 <br>
             </div>
             <?php if(!empty($errors['noAlbumsFile'])) {
@@ -315,6 +322,8 @@ include __DIR__ . '/../inc/header.php';
                 <input type="text" name="Name" id="Name" placeholder="ex. Like Ooh-Ahh" pattern="^\S+(\s)?\S*$" required
                 <?php if(!empty($errors) && empty($errors['noSongsFile']) && empty($errors['noAlbumsFile'])) {
                     errorHandler($_POST['Name'], $errors, 'Name');
+                } else {
+                    echo '>';
                 }?>
                 <br>
             </div>
@@ -323,6 +332,8 @@ include __DIR__ . '/../inc/header.php';
                 <input type="text" name="Length" id="Length" placeholder="ex. 3:21" pattern="^[0-9]{1}:[0-9]{2}$"
                 <?php if(!empty($errors) && empty($errors['noSongsFile']) && empty($errors['noAlbumsFile'])) {
                     errorHandler($_POST['Length'], $errors, 'Length');
+                } else {
+                    echo '>';
                 }?>
                 <br>
             </div>
@@ -336,7 +347,7 @@ include __DIR__ . '/../inc/header.php';
             </div>
             <div class="field">
                 <label for="file">File: </label>
-                <input type="file" name="file" id="file" accept=".text/csv">
+                <input type="file" name="file" id="file" accept=".text,.csv">
                 <br>
             </div>
             <?php if(!empty($errors['noSongsFile'])) {

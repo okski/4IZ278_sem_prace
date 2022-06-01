@@ -9,6 +9,6 @@
         Text is available under the <a href="https://creativecommons.org/licenses/by-sa/3.0/" class="cc">Creative Commons Attribution-ShareAlike License</a>.
     </p>
 </footer>
-<script src="/~hosj03/sem_prace/resources/js/gallery.js"/>
+<script src="/~hosj03/sem_prace/resources/js/gallery.js"></script>
 </body>
 </html>

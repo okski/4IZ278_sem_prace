@@ -53,7 +53,6 @@ function printContents ($uniqeYears) {
 
 function printAlbums($uniqeYears, $albums) {
     echo '<div>';
-
     foreach ($uniqeYears as $uniqeYear) {
 
         echo '<div id="year_'.htmlspecialchars($uniqeYear).'">
@@ -64,7 +63,7 @@ function printAlbums($uniqeYears, $albums) {
             $album->printAlbum($uniqeYear);
         }
 
-        echo '</div>';
+        echo '</div></div>';
     }
 
 

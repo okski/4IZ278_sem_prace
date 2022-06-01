@@ -17,8 +17,6 @@ ErrorDocument 401 /~hosj03/sem_prace/error/400.html
     Header set X-XSS-Protection "1; mode=block"
 </IfModule>
 
-Header set X-UA-Compatible "IE=Edge,chrome=1"
-
 php_value upload_max_filesize 5M
 php_value post_max_size 5M
 php_value max_execution_time 120

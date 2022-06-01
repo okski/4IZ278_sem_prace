@@ -54,10 +54,10 @@ echo '<!DOCTYPE html>
                 </li>
             </ul>
         </li>
-        <li id="History">
+        <li id="navHistory">
             <a href="/~hosj03/sem_prace/resources/php/forming.php">History</a>
         </li>
-        <li id="Discography">
+        <li id="navDiscography">
             <a href="/~hosj03/sem_prace/application/view/discography.php">Discography</a>
         </li>
         <li id="JYPE">
@@ -66,10 +66,10 @@ echo '<!DOCTYPE html>
         if (isset($_SESSION['Admin']) && $_SESSION['Admin']) {
             echo '<li id="Manage">
             <a href="/~hosj03/sem_prace/application/view/manage.php">Manage</a>';
+            echo '</li>';
         }
 
-        echo '</li>
-    </ol>
+        echo '</ol>
 </nav>
 <div class="log">';
 if (isset($_SESSION['IdUser']) && !empty($_SESSION['IdUser'])) {
