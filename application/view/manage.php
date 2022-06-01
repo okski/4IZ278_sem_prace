@@ -73,73 +73,86 @@ if (!empty($_POST)) {
         }
     } else if (isset($_POST['importAlbums'])) {
         $filename = $_FILES["file"]["tmp_name"];
+        if (empty($filename)) {
+            $errors['noAlbumsFile'] = 'Select some file.';
+        }
+
         $db->beginTransaction();
         $sqlSaveQuery = 'INSERT INTO hosj03.album (IdArtist, Name, ReleaseDate, NumberOfSongs, Cover)
                                 VALUES (:IdArtist, :Name, :ReleaseDate, :NumberOfSongs, :Cover);';
         $saveQuery = $db->prepare($sqlSaveQuery);
-        if ($_FILES["file"]["size"] > 0) {
-            $file = fopen($filename, "r");
 
-            if (isset($_POST["headerInc"])) {
-                fgets($file);
-            }
+        if (empty($errors)) {
+            if ($_FILES["file"]["size"] > 0) {
+                $file = fopen($filename, "r");
 
-            while (!feof($file)) {
-                $lineArr = fgetcsv($file, 1000, ";");
-                if ($lineArr == null) {
-                    continue;
+                if (isset($_POST["headerInc"])) {
+                    fgets($file);
                 }
-                try {
-                    $saveQuery->execute([
-                        ':IdArtist'=>$lineArr[0],
-                        ':Name'=>$lineArr[1],
-                        ':ReleaseDate'=>$lineArr[2],
-                        ':NumberOfSongs'=>$lineArr[3],
-                        ':Cover'=>$lineArr[4]
-                    ]);
-                } catch (PDOException $e) {
-                    echo "<span class='invalid'>The import ended with failure.</span>";
+
+                while (!feof($file)) {
+                    $lineArr = fgetcsv($file, 1000, ";");
+                    if ($lineArr == null) {
+                        continue;
+                    }
+                    try {
+                        $saveQuery->execute([
+                            ':IdArtist'=>$lineArr[0],
+                            ':Name'=>$lineArr[1],
+                            ':ReleaseDate'=>$lineArr[2],
+                            ':NumberOfSongs'=>$lineArr[3],
+                            ':Cover'=>$lineArr[4]
+                        ]);
+                    } catch (PDOException $e) {
+                        echo "<span class='invalid'>The import ended with failure.</span>";
+                    }
                 }
+                $db->commit();
+                fclose($file);
+                unset($_POST['importAlbums']);
+                header('Location: ./discography.php');
             }
-            $db->commit();
-            fclose($file);
-            unset($_POST['importAlbums']);
-            header('Location: ./discography.php');
         }
+
     } else if (isset($_POST['importSongs'])) {
         $filename = $_FILES["file"]["tmp_name"];
+        if (empty($filename)) {
+            $errors['noSongsFile'] = 'Select some file.';
+        }
 
         $db->beginTransaction();
         $sqlSaveQuery = 'INSERT INTO hosj03.song (IdAlbum, Name, Length)
                                 VALUES (:IdAlbum, :Name, :Length);';
         $saveQuery = $db->prepare($sqlSaveQuery);
 
-        if ($_FILES["file"]["size"] > 0) {
-            $file = fopen($filename, "r");
+        if (empty($errors)) {
+            if ($_FILES["file"]["size"] > 0) {
+                $file = fopen($filename, "r");
 
-            if (isset($_POST["headerInc"])) {
-                fgets($file);
-            }
+                if (isset($_POST["headerInc"])) {
+                    fgets($file);
+                }
 
-            while (!feof($file)) {
-                $lineArr = fgetcsv($file, 1000, ";");
-                if ($lineArr == null) {
-                    continue;
+                while (!feof($file)) {
+                    $lineArr = fgetcsv($file, 1000, ";");
+                    if ($lineArr == null) {
+                        continue;
+                    }
+                    try {
+                        $saveQuery->execute([
+                            ':IdAlbum'=>$lineArr[0],
+                            ':Name'=>$lineArr[1],
+                            ':Length'=>$lineArr[2]
+                        ]);
+                    } catch (PDOException $e) {
+                        echo "<span class='invalid'>The import ended with failure.</span>";
+                    }
                 }
-                try {
-                    $saveQuery->execute([
-                        ':IdAlbum'=>$lineArr[0],
-                        ':Name'=>$lineArr[1],
-                        ':Length'=>$lineArr[2]
-                    ]);
-                } catch (PDOException $e) {
-                    echo "<span class='invalid'>The import ended with failure.</span>";
-                }
+                $db->commit();
+                fclose($file);
+                unset($_POST['importSongs']);
+                header('Location: ./discography.php');
             }
-            $db->commit();
-            fclose($file);
-            unset($_POST['importSongs']);
-            header('Location: ./discography.php');
         }
     }
 
@@ -168,13 +181,13 @@ include __DIR__ . '/../inc/header.php';
         <label for="album">Add album</label>
         <input type="checkbox" id="album" name="album" onclick="changeVisibilityOfChildElement('album', 'albumSubMenu')"
         <?php
-        if ((isset($_POST['addAlbum']) || isset($_POST['importAlbums'])) && !empty($errors)) {
+        if (!empty($errors) && (!empty($errors['noAlbumsFile']) || isset($_POST['addAlbum']) || isset($_POST['importAlbums']))) {
             echo 'checked';}
         ?>
         />
     </div>
     <div id="albumSubMenu" <?php
-    if ((isset($_POST['addAlbum']) || isset($_POST['importAlbums'])) && !empty($errors)) {
+    if (!empty($errors) && (!empty($errors['noAlbumsFile']) || isset($_POST['addAlbum']) || isset($_POST['importAlbums']))) {
         echo 'onload="changeVisibilityOfChildElement(\'album\', \'albumSubMenu\')"';
     } else {
         echo 'style="display: none;"';
@@ -207,7 +220,7 @@ include __DIR__ . '/../inc/header.php';
             <div class="field">
                 <label for="Name">Name: </label>
                 <input type="text" name="Name" id="Name" placeholder="ex. The story begins" pattern="^\S+(\s)?\S*$" required
-                <?php if(!empty($errors)) {
+                <?php if(!empty($errors) && empty($errors['noSongsFile']) && empty($errors['noAlbumsFile'])) {
                     errorHandler($_POST['Name'], $errors, 'Name');
                 }?>
                 <br>
@@ -215,7 +228,7 @@ include __DIR__ . '/../inc/header.php';
             <div class="field">
                 <label for="ReleaseDate">Release date: </label>
                 <input type="text" name="ReleaseDate" id="ReleaseDate" placeholder="ex. 2022-05-23" pattern="^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
-                <?php if(!empty($errors)) {
+                <?php if(!empty($errors) && empty($errors['noSongsFile']) && empty($errors['noAlbumsFile'])) {
                     errorHandler($_POST['ReleaseDate'], $errors, 'ReleaseDate');
                 }?>
                 <?php ?>
@@ -224,7 +237,7 @@ include __DIR__ . '/../inc/header.php';
             <div class="field">
                 <label for="NumberOfSongs">Number of songs: </label>
                 <input type="text" name="NumberOfSongs" id="NumberOfSongs" pattern="^[0-9]{1,2}$" placeholder="ex. 12" required
-                <?php if(!empty($errors)) {
+                <?php if(!empty($errors) && empty($errors['noSongsFile']) && empty($errors['noAlbumsFile'])) {
                     errorHandler($_POST['NumberOfSongs'], $errors, 'NumberOfSongs');
                 }?>
                 <br>
@@ -232,7 +245,7 @@ include __DIR__ . '/../inc/header.php';
             <div class="field">
                 <label for="Cover">Cover: </label>
                 <input type="text" name="Cover" id="Cover" placeholder="ex. 01_The_story_begins.jpg" pattern="^\S*(\s)?\S*\.(jpg|png|webp|jpeg)$" required
-                <?php if(!empty($errors)) {
+                <?php if(!empty($errors) && empty($errors['noSongsFile']) && empty($errors['noAlbumsFile'])) {
                     errorHandler($_POST['Cover'], $errors, 'Cover');
                 }?>
                 <br>
@@ -250,6 +263,9 @@ include __DIR__ . '/../inc/header.php';
                 <input type="file" name="file" id="file" accept=".text/csv">
                 <br>
             </div>
+            <?php if(!empty($errors['noAlbumsFile'])) {
+                echo '<span class="text-danger">'.$errors['noAlbumsFile'].'</span><br>';
+            }?>
             <input type="submit" class="button" name="importAlbums" value="Import albums">
         </form>
     </div>
@@ -257,14 +273,14 @@ include __DIR__ . '/../inc/header.php';
         <label for="song">Add song</label>
         <input type="checkbox" id="song" name="song" onclick="changeVisibilityOfChildElement('song', 'songSubMenu')"
         <?php
-        if ((isset($_POST['addAlbum']) || isset($_POST['importAlbums'])) && !empty($errors)) {
+        if (!empty($errors) && (!empty($errors['noSongsFile']) || isset($_POST['addSong']) || isset($_POST['importSongs']))) {
             echo 'checked';}
         ?>
         />
     </div>
     <div id="songSubMenu"
     <?php
-    if ((isset($_POST['addAlbum']) || isset($_POST['importAlbums'])) && !empty($errors)) {
+    if (!empty($errors) && (!empty($errors['noSongsFile']) || isset($_POST['addSong']) || isset($_POST['importSongs']))) {
         echo 'onload="changeVisibilityOfChildElement(\'album\', \'albumSubMenu\')"';
     } else {
         echo 'style="display: none;"';
@@ -297,7 +313,7 @@ include __DIR__ . '/../inc/header.php';
             <div class="field">
                 <label for="Name">Name: </label>
                 <input type="text" name="Name" id="Name" placeholder="ex. Like Ooh-Ahh" pattern="^\S+(\s)?\S*$" required
-                <?php if(!empty($errors)) {
+                <?php if(!empty($errors) && empty($errors['noSongsFile']) && empty($errors['noAlbumsFile'])) {
                     errorHandler($_POST['Name'], $errors, 'Name');
                 }?>
                 <br>
@@ -305,7 +321,7 @@ include __DIR__ . '/../inc/header.php';
             <div class="field">
                 <label for="Length">Length: </label>
                 <input type="text" name="Length" id="Length" placeholder="ex. 3:21" pattern="^[0-9]{1}:[0-9]{2}$"
-                <?php if(!empty($errors)) {
+                <?php if(!empty($errors) && empty($errors['noSongsFile']) && empty($errors['noAlbumsFile'])) {
                     errorHandler($_POST['Length'], $errors, 'Length');
                 }?>
                 <br>
@@ -323,6 +339,9 @@ include __DIR__ . '/../inc/header.php';
                 <input type="file" name="file" id="file" accept=".text/csv">
                 <br>
             </div>
+            <?php if(!empty($errors['noSongsFile'])) {
+                echo '<span class="text-danger">'.$errors['noSongsFile'].'</span><br>';
+            }?>
             <input type="submit" class="button" name="importSongs" value="Import songs">
         </form>
     </div>
