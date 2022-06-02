@@ -10,11 +10,12 @@ echo '<!DOCTYPE html>
     <link rel="stylesheet" href="/~hosj03/sem_prace/resources/css/Image_gallery.css">
     <link href="/~hosj03/sem_prace/resources/img_c/favicon/favicon.png" rel="icon">
     <link rel="stylesheet" href="/~hosj03/sem_prace/resources/css/discography.css">
+    <script src="/~hosj03/sem_prace/resources/js/menu.js"></script>
 </head>
 <body>
 <nav>
     <ol>
-        <li id="Home">
+        <li id="navHome">
             <a href="/~hosj03/sem_prace/index.php">Home</a>
         </li>
         <li class="dropdown">
@@ -25,31 +26,31 @@ echo '<!DOCTYPE html>
             </p>
 
             <ul class="dropdown-content">
-                <li id="Nayeon">
+                <li id="navNayeon">
                     <a href="/~hosj03/sem_prace/resources/php/Nayeon.php">Nayeon (나연)</a>
                 </li>
-                <li id="Jeongyeon">
+                <li id="navJeongyeon">
                     <a href="/~hosj03/sem_prace/resources/php/Jeongyeon.php">Jeongyeon (정연)</a>
                 </li>
-                <li id="Momo">
+                <li id="navMomo">
                     <a href="/~hosj03/sem_prace/resources/php/Momo.php">Momo (모모)</a>
                 </li>
-                <li id="Sana">
+                <li id="navSana">
                     <a href="/~hosj03/sem_prace/resources/php/Sana.php">Sana (사나)</a>
                 </li>
-                <li id="Jihyo">
+                <li id="navJihyo">
                     <a href="/~hosj03/sem_prace/resources/php/Jihyo.php">Jihyo (지효)</a>
                 </li>
-                <li id="Mina">
+                <li id="navMina">
                     <a href="/~hosj03/sem_prace/resources/php/Mina.php">Mina (미나)</a>
                 </li>
-                <li id="Dahyun">
+                <li id="navDahyun">
                     <a href="/~hosj03/sem_prace/resources/php/Dahyun.php">Dahyun (다현)</a>
                 </li>
-                <li id="Chaeyoung">
+                <li id="navChaeyoung">
                     <a href="/~hosj03/sem_prace/resources/php/Chaeyoung.php">Chaeyoung (채영)</a>
                 </li>
-                <li id="Tzuyu">
+                <li id="navTzuyu">
                     <a href="/~hosj03/sem_prace/resources/php/Tzuyu.php">Tzuyu (쯔위)</a>
                 </li>
             </ul>
@@ -60,11 +61,11 @@ echo '<!DOCTYPE html>
         <li id="navDiscography">
             <a href="/~hosj03/sem_prace/application/view/discography.php">Discography</a>
         </li>
-        <li id="JYPE">
+        <li id="navJype">
             <a href="/~hosj03/sem_prace/resources/php/jype.php">JYPE</a>
         </li>';
         if (isset($_SESSION['Admin']) && $_SESSION['Admin']) {
-            echo '<li id="Manage">
+            echo '<li id="navManage">
             <a href="/~hosj03/sem_prace/application/view/manage.php">Manage</a>';
             echo '</li>';
         }
